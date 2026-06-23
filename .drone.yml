@@ -1,0 +1,26 @@
+kind: pipeline
+type: docker
+name: backend-ci
+
+steps:
+  - name: build-and-test
+    image: node:20
+    commands:
+      - cd backend
+      - npm ci
+      - npx prisma generate
+      - npm run test
+      - npm run build
+
+---
+kind: pipeline
+type: docker
+name: frontend-ci
+
+steps:
+  - name: build
+    image: node:20
+    commands:
+      - cd frontend
+      - npm ci
+      - npm run build
