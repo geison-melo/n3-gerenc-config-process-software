@@ -3,14 +3,29 @@ type: docker
 name: backend-ci
 
 steps:
-  - name: build-and-test
+  - name: install-dependencies
     image: node:20
     commands:
       - cd backend
       - npm ci
       - npx prisma generate
+
+  - name: run-unit-tests
+    image: node:20
+    commands:
+      - cd backend
       - npm run test
+
+  - name: build-project
+    image: node:20
+    commands:
+      - cd backend
       - npm run build
+
+  - name: deploy-backend
+    image: alpine
+    commands:
+      - echo "Realizando etapas adicionais de entrega/deploy do Back-end..."
 
 ---
 kind: pipeline
@@ -18,9 +33,19 @@ type: docker
 name: frontend-ci
 
 steps:
-  - name: build
+  - name: install-dependencies
     image: node:20
     commands:
       - cd frontend
       - npm ci
+
+  - name: build-project
+    image: node:20
+    commands:
+      - cd frontend
       - npm run build
+
+  - name: deploy-frontend
+    image: alpine
+    commands:
+      - echo "Realizando etapas adicionais de publicação/deploy do Front-end..."
