@@ -4,20 +4,20 @@ name: backend-ci
 
 steps:
   - name: install-dependencies
-    image: node:20
+    image: node:22
     commands:
       - cd backend
       - npm ci
       - npx prisma generate
 
   - name: run-unit-tests
-    image: node:20
+    image: node:22
     commands:
       - cd backend
       - npm run test
 
   - name: build-project
-    image: node:20
+    image: node:22
     commands:
       - cd backend
       - npm run build
@@ -34,13 +34,13 @@ name: frontend-ci
 
 steps:
   - name: install-dependencies
-    image: node:20
+    image: node:22
     commands:
       - cd frontend
       - npm ci
 
   - name: build-project
-    image: node:20
+    image: node:22
     commands:
       - cd frontend
       - npm run build
