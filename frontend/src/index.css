@@ -1,68 +1,152 @@
+/* Base Resets & Tokens */
 :root {
-  --bg-dark: #0f172a;
-  --bg-darker: #020617;
-  --bg-card: rgba(30, 41, 59, 0.7);
-  --text-main: #f8fafc;
-  --text-muted: #94a3b8;
-  --primary: #3b82f6;
-  --primary-hover: #2563eb;
-  --danger: #ef4444;
-  --danger-hover: #dc2626;
-  --border: rgba(255, 255, 255, 0.1);
-  --font-family: 'Inter', system-ui, sans-serif;
+  --bg-main: #f8fafc;
+  --sidebar-bg: #ffffff;
+  --text-primary: #0f172a;
+  --text-muted: #64748b;
+  --primary-color: #2563eb;
+  --primary-hover: #1d4ed8;
+  --primary-light: #eff6ff;
+  --border-color: #e2e8f0;
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
 body {
-  font-family: var(--font-family);
-  background-color: var(--bg-darker);
-  background-image: radial-gradient(circle at top right, rgba(59, 130, 246, 0.15), transparent 40%),
-                    radial-gradient(circle at bottom left, rgba(239, 68, 68, 0.1), transparent 40%);
-  color: var(--text-main);
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  font-family:
+    "Inter",
+    system-ui,
+    -apple-system,
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Base Layout Config */
+.admin-layout {
+  display: flex;
   min-height: 100vh;
 }
 
-.glass {
-  background: var(--bg-card);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+/* Premium Sidebar Layout */
+.sidebar {
+  width: 260px;
+  background-color: var(--sidebar-bg);
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  z-index: 50;
 }
 
-.container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 2rem; }
-
-h1, h2, h3 { font-weight: 700; letter-spacing: -0.5px; }
-h1 { font-size: 2.5rem; margin-bottom: 1.5rem; background: linear-gradient(to right, #60a5fa, #a78bfa); -webkit-background-clip: text; color: transparent; }
-h2 { font-size: 1.75rem; margin-bottom: 1rem; color: var(--text-main); }
-
-input, select {
-  width: 100%; padding: 0.75rem 1rem; margin-bottom: 1rem;
-  background: rgba(15, 23, 42, 0.6); border: 1px solid var(--border); border-radius: 8px;
-  color: var(--text-main); font-size: 1rem; transition: all 0.2s ease;
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.75rem 1.5rem;
+  border-bottom: 1px solid #f1f5f9;
 }
-input:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2); }
 
-.btn { padding: 0.75rem 1.5rem; border-radius: 8px; border: none; font-weight: 600; font-size: 1rem; cursor: pointer; transition: all 0.2s ease; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; }
-.btn-primary { background-color: var(--primary); color: white; box-shadow: 0 4px 14px rgba(59, 130, 246, 0.3); }
-.btn-primary:hover { background-color: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4); }
-.btn-danger { background-color: transparent; color: var(--danger); border: 1px solid var(--danger); padding: 0.4rem 0.8rem; font-size: 0.875rem; }
-.btn-danger:hover { background-color: var(--danger); color: white; }
+.brand-text {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
 
-nav { display: flex; gap: 1rem; margin-bottom: 2rem; background: var(--bg-card); padding: 1rem; border-radius: 16px; border: 1px solid var(--border); backdrop-filter: blur(12px); }
-nav a { text-decoration: none; color: var(--text-muted); font-weight: 600; padding: 0.5rem 1rem; border-radius: 8px; transition: all 0.2s; cursor: pointer; }
-nav a:hover, nav a.active { color: var(--text-main); background: rgba(255, 255, 255, 0.1); }
+.sidebar-nav {
+  padding: 1.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  flex: 1;
+}
 
-table { width: 100%; border-collapse: collapse; margin-top: 1.5rem; }
-th, td { padding: 1rem; text-align: left; border-bottom: 1px solid var(--border); }
-th { color: var(--text-muted); font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.05em; }
-tr:hover td { background: rgba(255, 255, 255, 0.03); }
+/* Nav Link Item Configurations */
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  color: var(--text-muted);
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.15s ease;
+}
 
-.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
-.card { padding: 1.5rem; }
-.form-group { margin-bottom: 1rem; }
-.form-group label { display: block; margin-bottom: 0.5rem; color: var(--text-muted); font-size: 0.875rem; }
-.flex { display: flex; gap: 1rem; align-items: center; }
-.justify-between { justify-content: space-between; }
+.nav-item:hover {
+  color: var(--text-primary);
+  background-color: #f1f5f9;
+}
+
+.nav-item.active {
+  color: var(--primary-color);
+  background-color: var(--primary-light);
+  font-weight: 600;
+}
+
+.sidebar-footer {
+  padding: 1.25rem 1.5rem;
+  border-top: 1px solid #f1f5f9;
+}
+
+.version-tag {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  font-family: monospace;
+}
+
+/* Right-side dashboard space */
+.main-content {
+  flex: 1;
+  margin-left: 260px; /* Accounts exactly for the static fixed sidebar */
+  min-width: 0;
+}
+
+/* Custom Keyframe Spin Fix for Lucide Loader Icons globally */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive Overrides */
+@media (max-width: 1024px) {
+  .admin-layout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    position: static;
+    width: 100%;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .sidebar-nav {
+    flex-direction: row;
+    padding: 0.75rem 1rem;
+    overflow-x: auto;
+  }
+
+  .sidebar-footer {
+    display: none;
+  }
+
+  .main-content {
+    margin-left: 0;
+  }
+}
