@@ -35,16 +35,27 @@ npm install
 npm run dev
 ```
 
-### 3. CI/CD (Testes Locais com Drone CLI)
-Para executar e validar localmente as esteiras de CI/CD definidas no arquivo `.drone.yml`, certifique-se de que o **Docker** está rodando no seu computador e utilize o **Drone CLI** (presente na raiz do projeto):
+### 3. Infraestrutura CI/CD Local (Gogs + Drone CI)
 
-No terminal (na raiz do projeto), execute o pipeline do Back-end:
+O projeto conta com uma infraestrutura local orquestrada via Docker Compose, provendo um servidor Git privado (Gogs) e um servidor de Integração Contínua (Drone CI).
+
+Para iniciar os servidores em segundo plano, execute na raiz do projeto:
 ```bash
-./drone.exe exec --pipeline backend-ci
+docker-compose up -d
 ```
 
-Para executar o pipeline do Front-end:
+> **Painéis de Acesso:**
+> - **Gogs (Repositório):** `http://192.168.1.99:3030`
+> - **Drone CI (Esteira):** `http://192.168.1.99:8088`
+> *(O IP `192.168.1.99` pode ser ajustado no docker-compose.yml e na URL caso a rede Wi-Fi seja alterada).*
+
+Após o envio do código para o servidor Gogs (`git push gogs main`), a esteira configurada no arquivo `.drone.yml` é disparada automaticamente, realizando o isolamento do código, instalação de dependências, testes unitários, build e simulação de deploy de forma segura.
+
+---
+**Alternativa ao Gogs+Drone CI: Drone CLI**
+Caso ocorram problemas na rede (Webhooks), as esteiras do `.drone.yml` podem ser executadas e validadas localmente via terminal sem a interface do Gogs. Certifique-se de que o **Docker** está rodando e utilize os executáveis presentes na raiz:
 ```bash
+./drone.exe exec --pipeline backend-ci
 ./drone.exe exec --pipeline frontend-ci
 ```
 
