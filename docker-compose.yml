@@ -15,14 +15,14 @@ services:
     image: drone/drone:2
     container_name: drone-server
     ports:
-      - "8080:80"
+      - "8088:80"
     volumes:
       - drone-data:/data
     restart: always
     environment:
       - DRONE_GOGS_SERVER=http://host.docker.internal:3030
       - DRONE_RPC_SECRET=super-secreto-n3
-      - DRONE_SERVER_HOST=host.docker.internal:8080
+      - DRONE_SERVER_HOST=host.docker.internal:8088
       - DRONE_SERVER_PROTO=http
       - DRONE_USER_CREATE=username:admin,admin:true
 
