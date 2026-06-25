@@ -20,9 +20,9 @@ services:
       - drone-data:/data
     restart: always
     environment:
-      - DRONE_GOGS_SERVER=http://host.docker.internal:3030
+      - DRONE_GOGS_SERVER=http://192.168.1.99:3030
       - DRONE_RPC_SECRET=super-secreto-n3
-      - DRONE_SERVER_HOST=host.docker.internal:8088
+      - DRONE_SERVER_HOST=192.168.1.99:8088
       - DRONE_SERVER_PROTO=http
       - DRONE_USER_CREATE=username:admin,admin:true
 
