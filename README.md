@@ -13,10 +13,13 @@ O projeto consiste em uma aplicação web full-stack para gestão de um cenário
 
 ## Como Executar Localmente
 
-Antes de iniciar o servidor, execute os comandos do Prisma para estruturar as tabelas localmente e atualizar as tipagens do client:
+Antes de iniciar o servidor, navegue até a pasta do back-end e execute os comandos do Prisma para estruturar as tabelas do banco de dados local e atualizar o client:
 
+```bash
+cd backend
 npx prisma db push
 npx prisma generate
+```
 
 ### 1. Back-end (API)
 Navegue até a pasta `backend`, instale as dependências e inicie o servidor em modo de desenvolvimento:
