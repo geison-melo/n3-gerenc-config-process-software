@@ -73,8 +73,8 @@ steps:
       - echo "Iniciando processo de deploy para a Vercel..."
       - |
         if [ -z "$VERCEL_TOKEN" ]; then
-          echo "AVISO: Segredos da Vercel (VERCEL_TOKEN) ausentes."
-          echo "Pulando o deploy real. Entrega simulada com sucesso."
+          echo "ERRO FATAL: Segredos da Vercel ausentes. Não é possível realizar o deploy."
+          exit 1
         else
           npm install -g vercel
           vercel pull --yes --environment=production --token=$VERCEL_TOKEN
