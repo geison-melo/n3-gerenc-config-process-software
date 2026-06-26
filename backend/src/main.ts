@@ -1,21 +1,15 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { ValidationPipe } from '@nestjs/common';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  
-  app.enableCors();
-  app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
 
-  const config = new DocumentBuilder()
-    .setTitle('E-commerce API')
-    .setDescription('API RESTful para gestão de Clientes, Produtos e Pedidos.')
-    .setVersion('1.0')
-    .build();
-  const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
+  // Enable CORS to allow your frontend to communicate with the backend
+  app.enableCors({
+    origin: 'http://localhost:5173', // specifically allow your Vite frontend
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true, // required if you are passing cookies or authorization headers
+  });
 
   await app.listen(3000);
 }
