@@ -49,3 +49,35 @@ steps:
     image: alpine
     commands:
       - echo "Realizando etapas adicionais de publicação/deploy do Front-end..."
+
+---
+kind: pipeline
+type: docker
+name: deploy-ci
+
+depends_on:
+  - backend-ci
+  - frontend-ci
+
+steps:
+  - name: deploy-to-vercel
+    image: node:22
+    environment:
+      VERCEL_TOKEN:
+        from_secret: vercel_token
+      VERCEL_ORG_ID:
+        from_secret: vercel_org_id
+      VERCEL_PROJECT_ID:
+        from_secret: vercel_project_id
+    commands:
+      - echo "Iniciando processo de deploy para a Vercel..."
+      - |
+        if [ -z "$VERCEL_TOKEN" ]; then
+          echo "AVISO: Segredos da Vercel (VERCEL_TOKEN) ausentes."
+          echo "Pulando o deploy real. Entrega simulada com sucesso."
+        else
+          npm install -g vercel
+          vercel pull --yes --environment=production --token=$VERCEL_TOKEN
+          vercel build --prod --token=$VERCEL_TOKEN
+          vercel deploy --prebuilt --prod --token=$VERCEL_TOKEN
+        fi
