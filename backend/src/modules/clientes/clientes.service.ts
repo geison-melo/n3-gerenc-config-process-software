@@ -38,7 +38,7 @@ export class ClientesService {
     try {
       return await this.prisma.cliente.update({ where: { id }, data });
     } catch (e) {
-      throw new NotFoundException('Cliente não encontrado');
+      throw new NotFoundException('Cliente não encontrado ' + e);
     }
   }
 
@@ -46,7 +46,7 @@ export class ClientesService {
     try {
       return await this.prisma.cliente.delete({ where: { id } });
     } catch (e) {
-      throw new NotFoundException('Cliente não encontrado');
+      throw new NotFoundException('Cliente não encontrado ' + e);
     }
   }
 }
