@@ -60,7 +60,7 @@ export function Produtos() {
 
   return (
     <div style={styles.page}>
-      {/* Top Header Section */}
+      {/* Cabeçalho */}
       <header style={styles.header}>
         <div>
           <h1 style={styles.mainTitle}>Cadastro de Produtos</h1>
@@ -71,7 +71,7 @@ export function Produtos() {
       </header>
 
       <div style={styles.dashboardGrid}>
-        {/* Form Card */}
+        {/* Formulário */}
         <div style={styles.card}>
           <div style={styles.cardHeader}>
             <PackagePlus size={18} color="#2563EB" />
@@ -141,7 +141,7 @@ export function Produtos() {
           </form>
         </div>
 
-        {/* List Card */}
+        {/* Lista de Produtos */}
         <div style={styles.card}>
           <div style={styles.cardHeader}>
             <div

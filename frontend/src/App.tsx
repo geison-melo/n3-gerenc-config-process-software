@@ -10,7 +10,7 @@ function App() {
 
   return (
     <div className="admin-layout">
-      {/* Sidebar Navigation */}
+      {/* Menu Lateral */}
       <aside className="sidebar">
         <div className="sidebar-brand">
           <LayoutDashboard size={22} color="#2563EB" />
@@ -48,7 +48,7 @@ function App() {
         </div>
       </aside>
 
-      {/* Main Panel Content Wrapper */}
+      {/* Conteúdo Principal */}
       <main className="main-content">
         {tab === "pedidos" && <Pedidos />}
         {tab === "clientes" && <Clientes />}

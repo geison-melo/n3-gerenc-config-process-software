@@ -50,7 +50,7 @@ export function Clientes() {
 
   return (
     <div style={styles.page}>
-      {/* Top Header Section */}
+      {/* Cabeçalho */}
       <header style={styles.header}>
         <div>
           <h1 style={styles.mainTitle}>Gestão de Clientes</h1>
@@ -61,7 +61,7 @@ export function Clientes() {
       </header>
 
       <div style={styles.dashboardGrid}>
-        {/* Form Card */}
+        {/* Formulário */}
         <div style={styles.card}>
           <div style={styles.cardHeader}>
             <UserPlus size={18} color="#2563EB" />
@@ -113,7 +113,7 @@ export function Clientes() {
           </form>
         </div>
 
-        {/* List Card */}
+        {/* Lista de Clientes */}
         <div style={styles.card}>
           <div style={styles.cardHeader}>
             <div

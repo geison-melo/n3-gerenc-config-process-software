@@ -21,21 +21,20 @@ export interface ItemPedido {
   produtoId: number;
   quantidade: number;
   precoUnit: number;
-  produto?: Produto; // Populated by Prisma's include
+  produto?: Produto;
 }
 
 export interface Pedido {
   id: number;
   clienteId: number;
-  cliente?: Cliente;   // Populated by Prisma's include
-  itens?: ItemPedido[]; // Populated by Prisma's include
   total: number;
-  createdAt?: string;
-  updatedAt?: string;
+  createdAt: string;
+  updatedAt: string;
+  cliente?: Cliente;
+  itens?: ItemPedido[];
 }
 
-// Form state tracking interfaces
 export interface FormItemPedido {
-  produtoId: string;
+  produtoId: number | string;
   quantidade: number;
 }

@@ -31,7 +31,7 @@ export function Pedidos() {
   ]);
   const [loading, setLoading] = useState(false);
 
-  // Track which order drawer is currently open
+  // Controla qual pedido está expandido na lista
   const [expandedPedidoId, setExpandedPedidoId] = useState<number | null>(null);
 
   const load = async () => {
@@ -83,9 +83,24 @@ export function Pedidos() {
     field: keyof FormItemPedido,
     value: string | number,
   ) => {
+    // UX: Se selecionar um produto que já existe na lista, incrementa a quantidade do existente e remove a linha atual
+    if (field === "produtoId" && value) {
+      const existingIndex = itens.findIndex(
+        (i, idx) => idx !== index && i.produtoId === String(value)
+      );
+      
+      if (existingIndex !== -1) {
+        const next = [...itens];
+        next[existingIndex].quantidade = Number(next[existingIndex].quantidade) + 1;
+        next.splice(index, 1);
+        setItens(next);
+        return;
+      }
+    }
+
     const next = [...itens];
 
-    // Using 'as any' here momentarily bypasses the strict key matching assignment mutation conflict
+    // O uso do 'as any' ignora momentaneamente o erro de tipagem estrita do React
     (next[index] as any)[field] = value;
 
     setItens(next);
@@ -118,7 +133,7 @@ export function Pedidos() {
 
   return (
     <div style={styles.page}>
-      {/* Top Header Section */}
+      {/* Cabeçalho */}
       <header style={styles.header}>
         <div>
           <h1 style={styles.mainTitle}>Pedidos de Venda</h1>
@@ -130,7 +145,7 @@ export function Pedidos() {
       </header>
 
       <div style={styles.dashboardGrid}>
-        {/* Form Card */}
+        {/* Formulário */}
         <div style={styles.card}>
           <div style={styles.cardHeader}>
             <ShoppingCart size={18} color="#2563EB" />
@@ -235,7 +250,7 @@ export function Pedidos() {
           </form>
         </div>
 
-        {/* List Card */}
+        {/* Lista de Pedidos */}
         <div style={styles.card}>
           <div style={styles.cardHeader}>
             <div
@@ -265,7 +280,7 @@ export function Pedidos() {
                   const isExpanded = expandedPedidoId === p.id;
                   return (
                     <Fragment key={p.id}>
-                      {/* Main Order Info Row */}
+                      {/* Linha Principal do Pedido */}
                       <tr
                         style={{
                           ...styles.tr,
@@ -326,7 +341,7 @@ export function Pedidos() {
                         </td>
                       </tr>
 
-                      {/* Nested Item Details Drawer Row */}
+                      {/* Detalhes dos Itens do Pedido */}
                       {isExpanded && (
                         <tr>
                           <td colSpan={5} style={styles.expandedCell}>
@@ -456,7 +471,7 @@ export function Pedidos() {
   );
 }
 
-// Simple Fragment Polyfill fallback to make sure vanilla import works cleanly
+// Fallback do Fragment para garantir o funcionamento do import puro
 const Fragment = (props: any) => props.children;
 
 const styles: Record<string, React.CSSProperties> = {
@@ -675,7 +690,7 @@ const styles: Record<string, React.CSSProperties> = {
   spinner: {
     animation: "spin 1s linear infinite",
   },
-  /* Styles for the sub-nested tracking panel */
+  /* Estilos para o painel de detalhes dos itens */
   expandedCell: {
     padding: "0 1rem 1.25rem 2.5rem",
     backgroundColor: "#F8FAFC",
