@@ -5,6 +5,8 @@ name: backend-ci
 steps:
   - name: install-dependencies
     image: node:22
+    environment:
+      DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/mydb?schema=public"
     commands:
       - cd backend
       - npm ci
@@ -12,12 +14,16 @@ steps:
 
   - name: run-unit-tests
     image: node:22
+    environment:
+      DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/mydb?schema=public"
     commands:
       - cd backend
       - npm run test
 
   - name: build-project
     image: node:22
+    environment:
+      DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/mydb?schema=public"
     commands:
       - cd backend
       - npm run build
