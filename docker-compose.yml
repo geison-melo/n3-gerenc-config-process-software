@@ -42,6 +42,7 @@ services:
       - DRONE_RPC_SECRET=super-secreto-n3
       - DRONE_RUNNER_CAPACITY=2
       - DRONE_RUNNER_NAME=local-runner
+      - DRONE_RUNNER_NETWORKS=projeto-n3_default
 
 volumes:
   gogs-data:
