@@ -67,6 +67,7 @@ steps:
         from_secret: vercel_org_id
       VERCEL_PROJECT_ID:
         from_secret: vercel_project_id
+      DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/mydb?schema=public"
     commands:
       - echo "Iniciando processo de deploy para a Vercel..."
       - |
