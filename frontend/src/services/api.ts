@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:3000';
+const BASE_URL = import.meta.env.PROD ? '/_/backend' : 'http://localhost:3000';
 
 export const api = {
   get: async (endpoint: string) => {
