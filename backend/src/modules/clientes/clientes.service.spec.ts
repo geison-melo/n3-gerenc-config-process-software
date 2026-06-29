@@ -27,10 +27,12 @@ describe('ClientesService', () => {
     service = module.get<ClientesService>(ClientesService);
   });
 
+  // TESTE 4: Verifica se o próprio arquivo de serviço dos clientes consegue ser carregado em memória sem erros
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
 
+  // TESTE 5: Verifica se o sistema consegue criar um novo cliente simulando uma chamada ao banco de dados
   it('should create a client', async () => {
     const dto = { nome: 'Test', email: 'test@test.com' };
     mockPrismaService.cliente.create.mockResolvedValue({ id: 1, ...dto });
@@ -38,6 +40,7 @@ describe('ClientesService', () => {
     expect(result).toEqual({ id: 1, ...dto });
   });
 
+  // TESTE 6: Verifica se a regra de paginação está calculando corretamente a quantidade de itens trazidos do banco
   it('should list clients with pagination', async () => {
     mockPrismaService.cliente.findMany.mockResolvedValue([
       { id: 1, nome: 'Test' },

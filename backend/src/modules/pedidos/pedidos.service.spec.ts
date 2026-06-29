@@ -25,6 +25,7 @@ describe('PedidosService', () => {
     service = module.get<PedidosService>(PedidosService);
   });
 
+  // TESTE 3: Verifica se a regra de negócio matemática está funcionando (se calcula o total multiplicando quantidade x preço corretamente)
   it('should calculate total properly and create pedido', async () => {
     const dto = { clienteId: 1, itens: [{ produtoId: 1, quantidade: 2 }] };
     mockPrismaService.produto.findUnique.mockResolvedValue({ id: 1, preco: 50 });
@@ -37,6 +38,6 @@ describe('PedidosService', () => {
         clienteId: 1,
       })
     }));
-    expect(result.total).toBe(100); // teste falha CI
+    expect(result.total).toBe(100); // <--- teste falha CI
   });
 });

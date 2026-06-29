@@ -15,6 +15,7 @@ describe('AppController', () => {
   });
 
   describe('root', () => {
+    // TESTE 1: Verifica se a rota inicial (root) está respondendo com "Hello World!"
     it('should return "Hello World!"', () => {
       expect(appController.getHello()).toBe('Hello World!');
     });

@@ -27,6 +27,7 @@ describe('ProdutosService', () => {
     service = module.get<ProdutosService>(ProdutosService);
   });
 
+  // TESTE 2: Verifica se a função de criar produto está enviando os dados corretos para o banco e retornando com sucesso
   it('should create a product', async () => {
     const dto = { nome: 'Produto', preco: 10 };
     mockPrismaService.produto.create.mockResolvedValue({ id: 1, ...dto });
