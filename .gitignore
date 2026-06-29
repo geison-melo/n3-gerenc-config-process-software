@@ -1,1 +1,4 @@
 drone.exe
+
+.vercel
+.env*
