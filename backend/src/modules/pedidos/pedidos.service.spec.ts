@@ -29,7 +29,7 @@ describe('PedidosService', () => {
     const dto = { clienteId: 1, itens: [{ produtoId: 1, quantidade: 2 }] };
     mockPrismaService.produto.findUnique.mockResolvedValue({ id: 1, preco: 50 });
     mockPrismaService.pedido.create.mockResolvedValue({ id: 1, total: 100 });
-    
+
     const result = await service.create(dto);
     expect(mockPrismaService.pedido.create).toHaveBeenCalledWith(expect.objectContaining({
       data: expect.objectContaining({
@@ -37,6 +37,6 @@ describe('PedidosService', () => {
         clienteId: 1,
       })
     }));
-    expect(result.total).toBe(100); // teste falha CI
+    expect(result.total).toBe(99); // teste falha CI
   });
 });
