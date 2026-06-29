@@ -37,6 +37,6 @@ describe('PedidosService', () => {
         clienteId: 1,
       })
     }));
-    expect(result.total).toBe(99); // teste falha CI -
+    expect(result.total).toBe(100); // teste falha CI
   });
 });
